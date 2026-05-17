@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EGGSHELLS — Substitution to Regeneration</title>
+<style>
+  @font-face {
+    font-family: 'Inter';
+    src: url('./font/Inter.ttf');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Inter';
+    src: url('./font/Inter-Italic.ttf');
+    font-weight: 100 900;
+    font-style: italic;
+  }
+</style>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #111;
+    --white: #fafaf8;
+    --gray-bg: #b5b5b5;
+    --gray-light: #e8e8e6;
+    --gray-mid: #999;
+  --max-w: 1400px;
+    --pad: clamp(20px, 4vw, 60px);
+
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══════════════════════════════════════
+     NAV
+     ═══════════════════════════════════════ */
+  nav {
+    padding: 20px 40px;
+  }
+  nav .logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--black);
+  }
+
+  /* ═══════════════════════════════════════
+     LAYOUT
+     ═══════════════════════════════════════ */
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+  }
+
+  .img-placeholder {
+    background: var(--gray-bg);
+    width: 100%;
+    display: block;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 1: HEADER
+     ═══════════════════════════════════════ */
+  .detail-header {
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 6px;
+    margin-top: 30px;
+  }
+  .detail-header h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+  }
+  .detail-header h1 span {
+    font-weight: 400;
+  }
+  .detail-author {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: right;
+    color: var(--black);
+    padding: 4px 0;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 2: HERO — 左图 + 右文字
+     ═══════════════════════════════════════ */
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 30px;
+  }
+  .hero-row .hero-img {
+    aspect-ratio: 3/3.8;
+    width: 100%;
+    object-fit: cover;
+  }
+  .hero-row .hero-text {
+    padding: 0 60px 0 80px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-row .hero-text p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  .hero-row .hero-text .bold-quote {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 3: GROUNDING THE SYSTEM — 左文字 + 右图
+     ═══════════════════════════════════════ */
+  .grounding-row {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 40px;
+    margin-top: 100px;
+    align-items: end;
+  }
+  .grounding-row .grounding-text h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding: 0 60px 0 30px;
+  }
+  .grounding-row .grounding-text p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 14px;
+    padding: 0 60px 0 30px;
+    
+  }
+  .grounding-row .grounding-img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16/10;
+  }
+
+  .img-caption {
+    font-size: 10px;
+    color: var(--gray-mid);
+    margin-top: 4px;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 4: DIAGRAM — 左文字 + 右大图
+     ═══════════════════════════════════════ */
+  .diagram-row {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 40px;
+    margin-top: 90px;
+    align-items: center;
+  }
+  .diagram-row .diagram-text p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 30px;
+    padding: 0 60px 0 30px;
+  }
+  .diagram-row .diagram-img {
+     width: 100%;
+    object-fit: contain;
+    aspect-ratio: 4/3;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 5: RECIPES — 左图 + 中文字 + 右图 × 2行
+     ═══════════════════════════════════════ */
+  .recipes {
+    margin-top: 80px;
+  }
+  .recipe-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  .recipe-row .recipe-img {
+    width: 100%;
+    object-fit: contain;
+    aspect-ratio: 4/3;
+  }
+  .recipe-row .recipe-text h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .recipe-row .recipe-text p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+  }
+  .recipe-row .recipe-text .recipe-temp {
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 12px;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 6: 三张图横排
+     ═══════════════════════════════════════ */
+  .three-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .three-images .three-img {
+    width: 100%;
+    object-fit: contain;
+    aspect-ratio: 4/3;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 7: PRODUCTS — 宽图 + 右文字
+     ═══════════════════════════════════════ */
+  .products-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 40px;
+    margin-top: 80px;
+    align-items: center;
+  }
+  .products-row .products-img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16/7;
+  }
+  .products-row .products-text h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding: 0 30px 0 60px;
+  }
+  .products-row .products-text p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+     margin-bottom: 14px;
+    padding: 0 30px 0 60px;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 8: SCALING — 左文字 + 右数据表图
+     ═══════════════════════════════════════ */
+  .scaling-section {
+    margin-top: 30px;
+  }
+  .scaling-header {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .scaling-header .scaling-text h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding: 0 60px 0 30px;
+  }
+  .scaling-header .scaling-text p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    color: #333;
+    padding: 0 60px 0 30px;
+  }
+  .scaling-header .scaling-table-img {
+    width: 100%;
+    object-fit: contain;
+    aspect-ratio: 16/8;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 9: TEST DATA — 左文字 + 右图 + caption
+     ═══════════════════════════════════════ */
+  .test-row {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 40px;
+    margin-top: 30px;
+    align-items: center;
+  }
+  .test-row .test-text p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+     margin-bottom: 14px;
+     padding: 0 60px 0 30px;
+    color: #333;
+  }
+  .test-row .test-text .bold-text {
+    font-weight: 700;
+  }
+  .test-row .test-img-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .test-row .test-img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+  }
+  .test-caption {
+    font-size: 12px;
+    font-weight: 400;
+    color: #333;
+    margin-top: 8px;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 10: CONCLUSION — 左大图 + 右文字
+     ═══════════════════════════════════════ */
+  .conclusion-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 40px;
+    margin-top: 160px;
+    align-items: center;
+  }
+  .conclusion-row .conclusion-img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+  }
+  .conclusion-row .conclusion-text .bold-quote {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 10px;
+     padding: 0 30px 0 60px;
+  }
+
+  .conclusion-row .conclusion-text p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+      margin-bottom: 16px;
+     padding: 0 30px 0 60px;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION 11: BACK LINK
+     ═══════════════════════════════════════ */
+  .back-link {
+    margin-top: 180px;
+    margin-bottom: 60px;
+  }
+ .back-link a {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    color: var(--black);
+    text-decoration: none;  
+}
+.back-link a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+}
+.fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .hero-row,
+    .grounding-row,
+    .diagram-row,
+    .recipe-row,
+    .products-row,
+    .scaling-header,
+    .test-row,
+    .conclusion-row {
+      grid-template-columns: 1fr;
+    }
+    .three-images {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Climate solution</div>
+</nav>
+
+<div class="container">
+
+  <!-- ═══════ SECTION 1: HEADER ═══════ -->
+  <div class="detail-header">
+    <h1>EGGSHELLS | <span>Substitution to Regeneration</span></h1>
+  </div>
+  <div class="detail-author">Scarlett Huo</div>
+
+  <!-- ═══════ SECTION 2: HERO — 左图 + 右文字 ═══════ -->
+  <div class="hero-row fade-up">
+<img class="hero-img" src="./img-scarlett/egg.jpg" alt="蛋壳主图">
+    <div class="hero-text">
+      <p>Eggshell waste is generated in large quantities globally. When sent to landfill, it decomposes under anaerobic conditions, releasing greenhouse gas into the atmosphere. With global egg production projected to reach 90 million tonnes by 2030, the scale of this overlooked byproduct is only growing.</p><br>
+      <div class="bold-quote">Reframing it from 'waste that needs to be handled' to 'a resource that can be used'</div><br>
+      <p>Eggshell is composed primarily of calcium carbonate, giving it a hardness and heat resistance that make it physically workable. Its slightly porous structure also enables moisture absorption. When crushed, re-formed, and cured with a binder, these properties open up possibilities for material reuse.</p>
+      <p>This project explores how eggshell waste can be upcycled into functional products that partially replace single-use and non-degradable materials, retaining its inherent potential to return to soil.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 3: GROUNDING THE SYSTEM ═══════ -->
+  <div class="grounding-row fade-up">
+    <div class="grounding-text">
+      <h2>Grounding the System</h2>
+      <p>A bakery is chosen as the pilot context, because it generates eggshell waste in significantly greater quantities than a typical household, and its production and usage processes allow collection, processing, and reuse to be completed within a relatively compact loop, embedded in existing systems without requiring entirely new infrastructure.</p>
+      <p>This makes the intervention more feasible and gives it the potential to be extended and replicated in similar contexts.</p>
+    </div>
+    <div>
+      <img class="grounding-img" src="./img-scarlett/machine.png" alt="machine">
+      <div class="img-caption">AI generated image based on physical models</div>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 4: DIAGRAM ═══════ -->
+  <div class="diagram-row fade-up">
+    <div class="diagram-text">
+      <p>This diagram illustrates the material cycle — how eggshell waste moves through the system, from generation to processing, into new products, and eventually back to soil.</p>
+    </div>
+    <img class="diagram-img" src="./img-scarlett/cycle.png" alt="cycle">
+  </div>
+
+  <!-- ═══════ SECTION 5: RECIPES ═══════ -->
+  <div class="recipes">
+
+    <!-- Recipe 1 -->
+    <div class="recipe-row fade-up">
+      <img class="recipe-img" src="./img-scarlett/1.png" alt="1">
+      <div class="recipe-text">
+        <h3>Recipe 1</h3>
+        <p>Eggshell + Egg white  7:3</p>
+        <div class="recipe-temp">Cure at 250°F · 10–15 min</div>
+      </div>
+      <img class="recipe-img" src="./img-scarlett/7.png" alt="7">
+    </div>
+
+    <!-- Recipe 2 -->
+    <div class="recipe-row fade-up">
+      <img class="recipe-img" src="./img-scarlett/2.png" alt="2">
+      <div class="recipe-text">
+        <h3>Recipe 2</h3>
+        <p>Eggshell + Flaxseed  7:3</p>
+        <div class="recipe-temp">Cure at 200°F · 20–25 min</div>
+      </div>
+      <img class="recipe-img" src="./img-scarlett/6.png" alt="6">
+    </div>
+
+  </div>
+
+  <!-- ═══════ SECTION 6: 三张图横排 ═══════ -->
+ <div class="three-images fade-up">
+  <img class="three-img" src="./img-scarlett/3.png" alt="3">
+  <img class="three-img" src="./img-scarlett/4.png" alt="4">
+  <img class="three-img" src="./img-scarlett/5.png" alt="5">
+</div>
+
+  <!-- ═══════ SECTION 7: PRODUCTS IN DIFFERENT TIMESCALES ═══════ -->
+  <div class="products-row fade-up">
+    <img class="products-img" src="./img-scarlett/products.png" alt="products">
+    <div class="products-text">
+      <h2>Products in Different Timescales</h2>
+      <p>The three products operate at different time scales. Their impact can be perceived relatively quickly once in use, while their eventual return to soil happens over a much longer period. The design emphasis is placed on the more immediate, perceptible stages, while keeping the longer-term potential in view.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 8: SCALING THE SYSTEM ═══════ -->
+  <div class="scaling-section fade-up">
+    <div class="scaling-header">
+      <div class="scaling-text">
+        <h2>Scaling the System</h2>
+        <p>The system is designed with the potential to scale. The data compares output at community bakery scale and at egg processing plant scale, with the absorbent block as a case study for scale-up effect.</p>
+      </div>
+      <img class="scaling-table-img" src="./img-scarlett/scale.png" alt="scale">
+    </div>
+
+    <!-- ═══════ SECTION 9: TEST DATA ═══════ -->
+    <div class="test-row fade-up">
+      <div class="test-text">
+        <p>This test data provides a basis for estimating the scale-up potential of the eggshell-made absorbent block. When scaled to brick size, it could serve as a biodegradable alternative to conventional chemical desiccants, with viable applications in spaces that require humidity control — replacing materials that are non-degradable and harder to dispose of responsibly.</p>
+      </div>
+      <div class="test-img-wrap">
+         <img class="test-img" src="./img-scarlett/data.png" alt="data">
+        <div class="test-caption">58 cm³ block: 19% humidity reduction / hr</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 10: CONCLUSION ═══════ -->
+  <div class="conclusion-row fade-up">
+    <img class="conclusion-img" src="./img-scarlett/conclusion.png" alt="conclusion">
+    <div class="conclusion-text">
+      <div class="bold-quote">One overlooked byproduct, one bakery context, three products, a small-scale attempt.</div><br>
+      <p>Its impact is limited, and deep behavioral change cannot be driven by a single product alone. But it demonstrates that working with a specific material can be a way of engaging with larger systems, and that even a local intervention can carry a broader climate intention.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ SECTION 11: BACK ═══════ -->
+  <div class="back-link">
+    <a href="index.html#index">BACK</a>
+  </div>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -28,8 +28,8 @@
     --gray-light: #e8e8e6;
     --gray-mid: #999;
     --accent: #c23a22;
-    --max-w: 1200px;
-    --pad: clamp(16px, 3vw, 40px);
+    --max-w: 1400px;
+    --pad: clamp(20px, 4vw, 60px);
   }
 
   html { scroll-behavior: smooth; scroll-snap-type: y proximity;}
@@ -49,7 +49,7 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 20px var(--pad);
+    padding: 20px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,6 +66,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-weight: 700;
+    letter-spacing: -0.3px;
     color: var(--black);
   }
 
@@ -256,9 +257,10 @@
   }
   .card .card-text {
     position: absolute;
-    top: 200px; left: 0; right: 0;
+    bottom: 60px; left: 0; right: 0;
     padding: 20px 16px;
     text-align: right;
+    
   }
 
   /*  "BEEF SCRAPS" 等 */
@@ -285,92 +287,10 @@
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-weight: 500;
-    color: #666;
-    margin-top: 10px;
-  }
-
-  /* ═══════════════════════════════════════
-     SECTION 4: INDIVIDUAL DETAIL
-     ═══════════════════════════════════════ */
-  #individual {
-    padding: clamp(60px, 8vw, 100px) 0 clamp(80px, 12vw, 140px);
-    border-top: 1px solid var(--gray-light);
-  }
-  #individual .detail-header {
-    border-bottom: 1px solid var(--black);
-    padding-bottom: 6px;
-    margin-bottom: 0;
-  }
-
-  /* "BEEF SCRAPS |"  */
-  #individual .detail-header h2 {
-    font-family: 'Inter', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-  }
-
-  /* "Gelatin Systems"  */
-  #individual .detail-header h2 span {
-    font-weight: 400;
-  }
-
-  /* "Celynn Kim"  */
-  #individual .detail-author {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    text-align: right;
     color: var(--black);
-    padding: 4px 0;
+    margin-top: 15px;
   }
 
-  .detail-top {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-  .detail-top .detail-main-img {
-    aspect-ratio: auto;
-    min-height: 360px;
-  }
-  .detail-top .detail-desc-img {
-    background: var(--gray-bg);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(24px, 4vw, 48px);
-    min-height: 360px;
-  }
-
-  /* "Description" */
-  .detail-top .detail-desc-img h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 14px;
-  }
-
-  .detail-top .detail-desc-img p {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.7;
-    color: #333;
-  }
-
-  .detail-wide-img {
-    aspect-ratio: 4/3;
-    margin-top: 6px;
-    position: relative;
-  }
-
-  .detail-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 6px;
-  }
-  .detail-grid-2 .img-placeholder { aspect-ratio: 4/3; }
 
   /* ═══════════════════════════════════════
      FOOTER
@@ -404,8 +324,6 @@
      ═══════════════════════════════════════ */
   @media (max-width: 820px) {
     .cards-grid { grid-template-columns: repeat(2, 1fr); }
-    .detail-top { grid-template-columns: 1fr; }
-    .detail-grid-2 { grid-template-columns: 1fr; }
   }
   @media (max-width: 520px) {
     .cards-grid { grid-template-columns: 1fr; }
@@ -417,14 +335,6 @@
 <!-- NAV -->
 <nav id="navbar">
   <div class="logo">Climate solution</div>
-  <!--
-  <div class="nav-links">
-    <a href="#hero">home</a>
-    <a href="#intent">intent</a>
-    <a href="#index">index</a>
-    <a href="#individual">detail</a>
-  </div>
-  -->
 </nav>
 
 <!-- SECTION 1: HERO -->
@@ -462,7 +372,7 @@
       <h2>Four waste streams.<br>Four material futures.</h2>
     </div>
     <div class="cards-grid">
-      <div class="card fade-up" id="beef-card" style="transition-delay:.05s">
+      <div class="card fade-up" style="transition-delay:.05s">
         <div class="card-text">
           <h3>BEEF SCRAPS</h3>
           <div class="card-sub">Gelatin Systems</div>
@@ -476,7 +386,7 @@
           <div class="card-author">Jason Xu</div>
         </div>
       </div>
-      <div class="card fade-up" style="transition-delay:.19s">
+      <div class="card fade-up" id="eggshells-card" style="transition-delay:.19s; background: url('./img-scarlett/3.png') 10% center/cover;">        
         <div class="card-text">
           <h3>EGGSHELLS</h3>
           <div class="card-sub">Substitution to Regeneration</div>
@@ -490,29 +400,6 @@
           <div class="card-author">Winnie Chou</div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 4: INDIVIDUAL DETAIL -->
-<section id="individual">
-  <div class="container">
-    <div class="detail-header fade-up">
-      <h2>BEEF SCRAPS | <span>Gelatin Systems</span></h2>
-    </div>
-    <div class="detail-author fade-up">Celynn Kim</div>
-    <div class="detail-top fade-up">
-      <div class="img-placeholder detail-main-img"></div>
-      <div class="detail-desc-img">
-        <h3>Description</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-      </div>
-    </div>
-    <div class="img-placeholder detail-wide-img fade-up">
-    </div>
-    <div class="detail-grid-2 fade-up">
-      <div class="img-placeholder"></div>
-      <div class="img-placeholder"></div>
     </div>
   </div>
 </section>
@@ -538,10 +425,10 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  document.getElementById('beef-card').addEventListener('click', () => {
-  document.getElementById('individual').scrollIntoView({ behavior: 'smooth' });
-});
-
+  // 点击 EGGSHELLS 卡片跳转到 scarlett.html
+  document.getElementById('eggshells-card').addEventListener('click', () => {
+    window.location.href = 'scarlett.html';
+  });
 </script>
 </body>
 </html>
